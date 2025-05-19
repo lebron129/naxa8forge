@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="En5cCz7KagevjQ7uWyNIfdhuu658aq2LskxWc4Ddd9o" />
+  <title>eBook Creator Service</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+    header { background: #333; color: #fff; padding: 1rem; text-align: center; }
+    main { padding: 2rem; max-width: 800px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    form input, form textarea, form select { width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 5px; border: 1px solid #ccc; }
+    .pack { margin-bottom: 1rem; }
+    footer { background: #333; color: #fff; text-align: center; padding: 1rem; margin-top: 2rem; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Get Your Custom eBook Today</h1>
+    <p>Professional, Fast, and Tailored to Your Needs</p>
+  </header>
+  <main>
+    <form id="ebookForm">
+      <label>Name:</label>
+      <input type="text" name="name" required /><label>Email:</label>
+  <input type="email" name="email" required />
+
+  <label>What kind of ebook do you want? (Quiz):</label>
+  <select name="genre">
+    <option value="paranormal">Paranormal</option>
+    <option value="investigation">Investigation</option>
+    <option value="inspiration">Inspiration</option>
+    <option value="djibouti">Djibouti</option>
+  </select>
+
+  <label>Describe what you want in the ebook:</label>
+  <textarea name="details" rows="4" required></textarea>
+
+  <label>Choose your package:</label>
+  <div class="pack">
+    <input type="radio" name="package" value="basic" checked /> Basic - $20<br />
+    <input type="radio" name="package" value="standard" /> Standard - $40<br />
+    <input type="radio" name="package" value="premium" /> Premium - $100
+  </div>
+
+  <button type="submit">Submit Order</button>
+</form>
+<p id="confirmation" style="color:green; font-weight:bold;"></p>
+
+<hr />
+<p>Payments accepted via:</p>
+<ul>
+  <li>MetaMask (Crypto): <strong>0x5532740a2b6be988C200cEb7Fd134bCD6bbfB114</strong></li>
+  <li>Moov / Wave: <strong>0153522716</strong></li>
+</ul>
+<p><a href="https://wa.me/2250153522716" target="_blank">Contact us on WhatsApp</a></p>
+
+  </main>  <footer>
+    <p>&copy; 2025 Naxa7Forge - All rights reserved</p>
+  </footer>  <script>
+    document.getElementById('ebookForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      const message = `New eBook Order:\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nGenre: ${data.get("genre")}\nDetails: ${data.get("details")}\nPackage: ${data.get("package")}`;
+
+      // Send via EmailJS or API service (example only)
+      fetch("https://formspree.io/f/your-form-id", { // replace with your real endpoint or EmailJS
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: data
+      }).then(() => {
+        document.getElementById('confirmation').innerText = "Thank you! Your order has been submitted.";
+        form.reset();
+      }).catch(() => {
+        document.getElementById('confirmation').innerText = "Error sending the order. Please contact us on WhatsApp.";
+      });
+    });
+  </script></body>
+</html>
